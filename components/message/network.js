@@ -30,7 +30,7 @@ router.post("/", upload.single("file"), function (req, res) {
     response.error(
       req,
       res,
-      "informacion invalid",
+      "cion invalido",
       400,
       "error en el controlador"
     );

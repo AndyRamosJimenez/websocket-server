@@ -10,7 +10,7 @@ const db = require("./db");
 const router = require("./network/routes");
 
 db(
-
+  "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.bmamo.mongodb.net/users?retryWrites=true&w=majority"
 );
 
 app.use(bodyParser.json());
