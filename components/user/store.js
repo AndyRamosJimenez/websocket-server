@@ -1,15 +1,52 @@
 const Model = require("./model");
+const list = [];
 
-function addUser(user) {
-    const myUser = new Model(user)
-    return myUser.save()
+function addMessage(message) {
+  // list.push(message)
+  const myMessage = new Model(message);
+  myMessage.save();
 }
 
-function userList() {
-  return Model.find();
+async function getMessage(filterUser) {
+  return new Promise((resolve, reject) => {
+    let filter = {};
+    if (filterUser !== null) {
+      filter = { user: filterUser };
+    }
+    const messages = Model.find(filter)
+      .populate("user")
+      .exec((error, populate) => {
+        if (error) {
+          reject(error)
+          return false
+        }
+        resolve(populate)
+      });
+    return messages;
+  });
+}
+
+async function updateText(id, message) {
+  console.log(id);
+  console.log(message);
+  const foundMessage = await Model.findOne({
+    _id: id,
+  });
+  foundMessage = messages;
+
+  const newMessage = foundMessage.save();
+  return newMessage;
+}
+
+function removeMessage(id) {
+  return Model.findOne({
+    _id: id,
+  });
 }
 
 module.exports = {
-  add: addUser,
-  userList
+  add: addMessage,
+  list: getMessage,
+  updateText: updateText,
+  remove: removeMessage,
 };
