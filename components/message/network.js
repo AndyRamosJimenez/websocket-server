@@ -22,19 +22,15 @@ router.get("/", function (req, res) {
 
 router.post("/", upload.single("file"), function (req, res) {
   console.log(req.file);
-  controller.addMessage(req.body.chat, req.body.user, req.body.message, req.file );
+  controller
+    .addMessage(req.body.chat, req.body.user, req.body.message, req.file)
 
-  then((fullMessage) => {
-    response.success(req, res, fullMessage, 201);
-  }).catch((e) => {
-    response.error(
-      req,
-      res,
-      "cion invalido",
-      400,
-      "error en el controlador"
-    );
-  });
+    .then((fullMessage) => {
+      response.success(req, res, fullMessage, 201);
+    })
+    .catch((e) => {
+      response.error(req, res, "cion invalido", 400, "error en el controlador");
+    });
   if (req.query.error == "ok") {
     response.error(req, res, "Error simulado", 500, "Es solo una simulacion");
   } else {
